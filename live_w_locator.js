@@ -65,6 +65,7 @@ $(function() {
         attachListeners: function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
+                audio.play();
                 Quagga.stop();
             });
         },
@@ -202,8 +203,7 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            if(!audio.isPlaying)
-                audio.play();
+            audio.play();
         }
     });
 
