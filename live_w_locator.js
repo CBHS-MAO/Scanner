@@ -70,11 +70,10 @@ $(function() {
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
-
         if (App.lastResult !== code) {
             App.lastResult = code;
-            var $node = $('<li class="code"></li>');
-            $node.find("li.code").html(code);
+            var $node = $('<li class="code"><h4 class="code"></h4></li>');
+            $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
