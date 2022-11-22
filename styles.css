@@ -11,19 +11,16 @@
 }
 
 #interactive.viewport {
-  width: 640px;
-  height: 480px;
   border-style: solid;
   border-width: 10px;
+  display: grid;
 }
 
-#interactive.viewport canvas, video {
-  float: left;
-  width: 640px;
-  height: 480px;
+#interactive.viewport br {
+  display: none;
 }
 
-#interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
-  margin-left: -640px;
+canvas, video  {
+  grid-column-start: 1;
+  grid-row-start: 1;
 }
-
