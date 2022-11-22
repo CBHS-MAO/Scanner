@@ -1,5 +1,4 @@
 $(function() {
-    var audio = document.getElementById("audio");
     var App = {
         init: function() {
             var self = this;
@@ -9,7 +8,6 @@ $(function() {
                     return self.handleError(err);
                 }
                 App.attachListeners();
-                App.checkCapabilities();
                 console.log("Initialization finished. Ready to start.");
                 Quagga.start();
             });
@@ -17,132 +15,18 @@ $(function() {
         handleError: function(err) {
             console.log(err);
         },
-        checkCapabilities: function() {
-            var track = Quagga.CameraAccess.getActiveTrack();
-            var capabilities = {};
-            if (typeof track.getCapabilities === 'function') {
-                capabilities = track.getCapabilities();
-            }
-            this.applySettingsVisibility('zoom', capabilities.zoom);
-            this.applySettingsVisibility('torch', capabilities.torch);
-        },
-        updateOptionsForMediaRange: function(node, range) {
-            console.log('updateOptionsForMediaRange', node, range);
-            var NUM_STEPS = 6;
-            var stepSize = (range.max - range.min) / NUM_STEPS;
-            var option;
-            var value;
-            while (node.firstChild) {
-                node.removeChild(node.firstChild);
-            }
-            for (var i = 0; i <= NUM_STEPS; i++) {
-                value = range.min + (stepSize * i);
-                option = document.createElement('option');
-                option.value = value;
-                option.innerHTML = value;
-                node.appendChild(option);
-            }
-        },
-        applySettingsVisibility: function(setting, capability) {
-            // depending on type of capability
-            if (typeof capability === 'boolean') {
-                var node = document.querySelector('input[name="settings_' + setting + '"]');
-                if (node) {
-                    node.parentNode.style.display = capability ? 'block' : 'none';
-                }
-                return;
-            }
-            if (window.MediaSettingsRange && capability instanceof window.MediaSettingsRange) {
-                var node = document.querySelector('select[name="settings_' + setting + '"]');
-                if (node) {
-                    this.updateOptionsForMediaRange(node, capability);
-                    node.parentNode.style.display = 'block';
-                }
-                return;
-            }
-        },
         attachListeners: function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
                 Quagga.stop();
             });
-            $(".container").on("click", "button.beep", function(e) {
-                audio.play();
-            })
-        },
-        _accessByPath: function(obj, path, val) {
-            var parts = path.split('.'),
-                depth = parts.length,
-                setter = (typeof val !== "undefined") ? true : false;
-
-            return parts.reduce(function(o, key, i) {
-                if (setter && (i + 1) === depth) {
-                    if (typeof o[key] === "object" && typeof val === "object") {
-                        Object.assign(o[key], val);
-                    } else {
-                        o[key] = val;
-                    }
-                }
-                return key in o ? o[key] : {};
-            }, obj);
-        },
-        _convertNameToState: function(name) {
-            return name.replace("_", ".").split("-").reduce(function(result, value) {
-                return result + value.charAt(0).toUpperCase() + value.substring(1);
-            });
         },
         detachListeners: function() {
             $(".container").off("click", "button.stop");
         },
-        applySetting: function(setting, value) {
-            var track = Quagga.CameraAccess.getActiveTrack();
-            if (track && typeof track.getCapabilities === 'function') {
-                switch (setting) {
-                case 'zoom':
-                    return track.applyConstraints({advanced: [{zoom: parseFloat(value)}]});
-                case 'torch':
-                    return track.applyConstraints({advanced: [{torch: !!value}]});
-                }
-            }
-        },
-        inputMapper: {
-            inputStream: {
-                constraints: function(value){
-                    if (/^(\d+)x(\d+)$/.test(value)) {
-                        var values = value.split('x');
-                        return {
-                            width: {min: parseInt(values[0])},
-                            height: {min: parseInt(values[1])}
-                        };
-                    }
-                    return {
-                        deviceId: value
-                    };
-                }
-            },
-            numOfWorkers: function(value) {
-                return parseInt(value);
-            },
-            decoder: {
-                readers: function(value) {
-                    if (value === 'ean_extended') {
-                        return [{
-                            format: "ean_reader",
-                            config: {
-                                supplements: [
-                                    'ean_5_reader', 'ean_2_reader'
-                                ]
-                            }
-                        }];
-                    }
-                    return [{
-                        format: value + "_reader",
-                        config: {}
-                    }];
-                }
-            }
-        },
         state: {
+            numOfWorkers: 2,
+            locate: true,
             inputStream: {
                 type : "LiveStream",
                 constraints: {
@@ -152,25 +36,40 @@ $(function() {
                     aspectRatio: {min: 1, max: 2}
                 }
             },
-            locator: {
-                patchSize: "medium",
-                halfSample: true
-            },
-            numOfWorkers: 1,
             frequency: 10,
             decoder: {
-                readers : [{
-                    format: "code_39_reader",
-                    config: {}
-                }]
+                readers : ["code_39_reader"],
+                debug: {
+                    drawBoundingBox: false,
+                    showFrequency: false,
+                    drawScanLine: false,
+                    showPattern: false
+                }
             },
-            locate: true
+            locator: {
+                halfSample: true,
+                patchSize: "large",
+                debug: {
+                    showCanvas: false,
+                    showPatches: false,
+                    showFoundPatches: false,
+                    showSkeleton: false,
+                    showLabels: false,
+                    showPatchLabels: false,
+                    showRemainingPatchLabels: false,
+                    boxFromPatches: {
+                      showTransformed: false,
+                      showTransformedBox: false,
+                      showBB: false
+                    }
+                }
+            },
+            debug: false
         },
         lastResult : null
     };
 
     App.init();
-
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
@@ -180,8 +79,6 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            audio.currentTime = 0;
-            audio.play();
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }

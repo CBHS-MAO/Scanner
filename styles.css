@@ -11,9 +11,6 @@ h1, h2, h3, h4 {
   font-family: "Cabin Condensed", sans-serif;
 }
 
-audio {
-  display: none;
-}
 #container {
   width: 640px;
   margin: 20px auto;
@@ -30,32 +27,6 @@ audio {
   height: 480px;
 }
 
-#interactive.viewport canvas, video {
-  float: left;
-  width: 640px;
-  height: 480px;
-}
-
 #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
-  margin-left: -640px;
-}
-
-@media (max-width: 603px) {
-
-  #interactive.viewport {
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
-  }
-
-  #interactive.viewport canvas, video {
-    margin-top: -50px;
-    width: 300px;
-    height: 400px;
-  }
-
-  #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
-    margin-left: -300px;
-  }
-
+  display: none;
 }
