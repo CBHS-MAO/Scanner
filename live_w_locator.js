@@ -64,8 +64,9 @@ $(function() {
         attachListeners: function() {
             var self = this;
 
-            $(".controls").on("click", "button.stop", function(e) {
+            $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
+                audio.play();
                 Quagga.stop();
             });
         },
