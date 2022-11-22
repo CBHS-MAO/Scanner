@@ -1,5 +1,4 @@
 $(function() {
-    var audio = new Audio('beep.mp3');
     var App = {
         init: function() {
             var self = this;
@@ -66,7 +65,6 @@ $(function() {
 
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
-                audio.play();
                 Quagga.stop();
             });
         },
@@ -195,6 +193,7 @@ $(function() {
         }
     });
 
+    var audio = new Audio('beep.mp3');
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
 
