@@ -1,5 +1,3 @@
-@charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700|Cabin+Condensed:400,600");
 
 body {
   background-color: #FFF;
@@ -172,18 +170,6 @@ i.icon-24-scan {
   }
 }
 @media (max-width: 603px) {
-
-  .reader-config-group {
-    width: 100%;
-  }
-
-  .reader-config-group label > span {
-      width: 50%;
-  }
-
-  .reader-config-group label > select, .reader-config-group label > input {
-      max-width: calc(50% - 2px);
-  }
 
   #interactive.viewport {
     width: 300px;

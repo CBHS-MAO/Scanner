@@ -199,12 +199,11 @@ $(function() {
 
         if (App.lastResult !== code) {
             App.lastResult = code;
-            var $node = null;
-            $node = $('<li><h4 class="code"></h4></li>');
+            var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
-            $("#result_strip ul.codes").prepend($node);
-            audio.play();
+            $("ul.codes").prepend($node);
         }
+        audio.play();
     });
 
 });
