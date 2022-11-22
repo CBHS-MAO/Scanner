@@ -1,5 +1,4 @@
 $(function() {
-    var audio = new Audio("beep.mp3");
     var App = {
         init: function() {
             var self = this;
@@ -66,9 +65,6 @@ $(function() {
                 e.preventDefault();
                 Quagga.stop();
             });
-            $(".container").on("click", "button.beep", function(e) {
-                audio.play();
-            })
         },
         _accessByPath: function(obj, path, val) {
             var parts = path.split('.'),
@@ -153,10 +149,10 @@ $(function() {
                 }
             },
             locator: {
-                patchSize: "medium",
+                patchSize: "large",
                 halfSample: true
             },
-            numOfWorkers: 1,
+            numOfWorkers: 2,
             frequency: 10,
             decoder: {
                 readers : [{
@@ -203,8 +199,6 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            if (!audio.isPlaying)
-                audio.play();
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }
