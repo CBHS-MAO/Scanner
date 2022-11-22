@@ -1,4 +1,5 @@
 $(function() {
+    var audio = new Audio('beep.mp3');
     var App = {
         init: function() {
             var self = this;
@@ -202,6 +203,7 @@ $(function() {
             $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("#result_strip ul.codes").prepend($node);
+            audio.play();
         }
     });
 
