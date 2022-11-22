@@ -32,6 +32,7 @@ $(function() {
                 type : "LiveStream",
                 constraints: {
                     facingMode: "environment",
+                    aspectRatio: {min: 3, max: 3}
                 }
             },
             frequency: 10,
