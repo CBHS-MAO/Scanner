@@ -30,10 +30,7 @@ $(function() {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
-                    width: {min: 640},
-                    height: {min: 480},
                     facingMode: "environment",
-                    aspectRatio: {min: 1, max: 2}
                 }
             },
             frequency: 10,
@@ -76,8 +73,8 @@ $(function() {
 
         if (App.lastResult !== code) {
             App.lastResult = code;
-            var $node = $('<li><h4 class="code"></h4></li>');
-            $node.find("h4.code").html(code);
+            var $node = $('<li class="code"></li>');
+            $node.find("li.code").html(code);
             $("ul.codes").prepend($node);
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);

@@ -1,31 +1,16 @@
-body {
-  background-color: #FFF;
-  margin: 0px;
-  font-family: Ubuntu, sans-serif;
-  color: #1e1e1e;
-  font-weight: normal;
-  padding-top: 0;
-}
-
-h1, h2, h3, h4 {
-  font-family: "Cabin Condensed", sans-serif;
-}
-
 #container {
-  width: 640px;
-  margin: 20px auto;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#interactive {
+#interactive.viewport{
   border-style: solid;
   border-width: 10px;
+  display: flex;
 }
 
-#interactive.viewport {
-  width: 640px;
-  height: 480px;
-}
 
 #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
   display: none;
