@@ -1,4 +1,5 @@
 $(function() {
+    var audio = new Audio("beep.mp3");
     var App = {
         init: function() {
             var self = this;
@@ -10,6 +11,7 @@ $(function() {
                 App.attachListeners();
                 App.checkCapabilities();
                 console.log("Initialization finished. Ready to start.");
+                audio.play();
                 Quagga.start();
             });
         },
@@ -63,7 +65,6 @@ $(function() {
         attachListeners: function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
-                alert("This is an alert");
                 Quagga.stop();
             });
         },
@@ -168,6 +169,8 @@ $(function() {
 
     App.init();
 
+
+
     Quagga.onProcessed(function(result) {
         var drawingCtx = Quagga.canvas.ctx.overlay,
             drawingCanvas = Quagga.canvas.dom.overlay;
@@ -189,6 +192,7 @@ $(function() {
             if (result.codeResult && result.codeResult.code) {
                 Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
             }
+
         }
     });
 
@@ -200,14 +204,9 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            alert("this is an alert");
-            play();
+            if(!audio.isPlaying)
+                audio.play();
         }
     });
-
-    function play() {
-        var audio = new Audio("beep.mp3");
-        audio.play();
-    }
 
 });
