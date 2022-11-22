@@ -80,21 +80,16 @@ h1, h2, h3, h4 {
   width: 160px;
 }
 
-#result_strip > ul > li .thumbnail {
+#result_strip > ul > li .code {
   padding: 5px;
   margin: 4px;
   border: 1px dashed #CCC;
 }
 
-#result_strip > ul > li .thumbnail img {
-  max-width: 140px;
-}
 
-#result_strip > ul > li .thumbnail .caption {
+
+#result_strip > ul > li .code {
   white-space: normal;
-}
-
-#result_strip > ul > li .thumbnail .caption h4 {
   text-align: center;
   word-wrap: break-word;
   height: 40px;
