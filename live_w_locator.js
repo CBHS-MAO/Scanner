@@ -1,4 +1,5 @@
 $(function() {
+    var codes = "";
     var App = {
         init: function() {
             var self = this;
@@ -16,13 +17,13 @@ $(function() {
             console.log(err);
         },
         attachListeners: function() {
-            $(".container").on("click", "button.stop", function(e) {
+            $(".container").on("click", "button", function(e) {
                 e.preventDefault();
                 Quagga.stop();
+                document.getElementById("interactive").remove();
+                navigator.clipboard.writeText(codes);
+                document.getElementById("done").style.display = "block";
             });
-        },
-        detachListeners: function() {
-            $(".container").off("click", "button.stop");
         },
         state: {
             numOfWorkers: 2,
@@ -75,6 +76,7 @@ $(function() {
             var $node = $('<li class="code"><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
+            codes += code + ", ";
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }

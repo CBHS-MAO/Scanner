@@ -11,7 +11,10 @@
   display: flex;
 }
 
-
+#done {
+  display: none;
+  color: lime;
+}
 #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
   display: none;
 }
