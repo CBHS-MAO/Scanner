@@ -1,5 +1,5 @@
 $(function() {
-    var audio = new Audio("beep.mp3");
+    var audio = document.getElementById("audio");
     var App = {
         init: function() {
             var self = this;

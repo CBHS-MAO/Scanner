@@ -11,6 +11,9 @@ h1, h2, h3, h4 {
   font-family: "Cabin Condensed", sans-serif;
 }
 
+audio {
+  display: none;
+}
 #container {
   width: 640px;
   margin: 20px auto;
