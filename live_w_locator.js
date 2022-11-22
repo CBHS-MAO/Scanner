@@ -192,7 +192,6 @@ $(function() {
             if (result.codeResult && result.codeResult.code) {
                 Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
             }
-            document.getElementById("interactive").style.borderColor = "black";
         }
     });
 
@@ -204,9 +203,10 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            document.getElementById("interactive").style.borderColor = "green";
             if (!audio.isPlaying)
                 audio.play();
+            document.getElementById("interactive").style.borderColor = "lime";
+            setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }
     });
 
