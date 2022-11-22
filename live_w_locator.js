@@ -39,10 +39,7 @@ $(function() {
             numOfWorkers: 2,
             frequency: 10,
             decoder: {
-                readers : [{
-                    format: "code_39_reader",
-                    config: {}
-                }]
+                readers : ["code_39_reader"]
             },
             locate: true
         },
