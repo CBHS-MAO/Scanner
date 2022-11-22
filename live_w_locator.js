@@ -61,14 +61,9 @@ $(function() {
             }
         },
         attachListeners: function() {
-            var self = this;
-
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
                 Quagga.stop();
-            });
-            $(".codes").on("DOMNodeInserted", function(e) {
-                Audio('beep.mp3').play();
             });
         },
         _accessByPath: function(obj, path, val) {
@@ -94,7 +89,6 @@ $(function() {
         },
         detachListeners: function() {
             $(".container").off("click", "button.stop");
-            $(".codes").off("DOMNodeInserted");
         },
         applySetting: function(setting, value) {
             var track = Quagga.CameraAccess.getActiveTrack();
@@ -205,7 +199,13 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
+            play();
         }
     });
+
+    function play() {
+        var audio = new Audio("beep.mp3");
+        audio.play();
+    }
 
 });
