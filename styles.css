@@ -1,3 +1,13 @@
+#done {
+  display: none;
+  color: lime;
+}
+
+
+
+
+
+
 body {
   background-color: #FFF;
   margin: 0px;
