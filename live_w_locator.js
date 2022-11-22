@@ -63,6 +63,7 @@ $(function() {
         attachListeners: function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
+                alert("This is an alert");
                 Quagga.stop();
             });
         },
@@ -199,6 +200,7 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
+            alert("this is an alert");
             play();
         }
     });
