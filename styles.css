@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-shrink: 1;
 }
 
 #interactive.viewport{
@@ -14,14 +13,14 @@
 
 #interactive.viewport video {
   display: flex;
-  width: 90vw;
+  width: 98vw;
 }
-
 
 #done {
   display: none;
   color: lime;
 }
+
 #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
   display: none;
 }
