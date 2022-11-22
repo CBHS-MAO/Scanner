@@ -193,7 +193,6 @@ $(function() {
         }
     });
 
-    var audio = new Audio('beep.mp3');
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
 
@@ -203,7 +202,7 @@ $(function() {
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
         }
-        audio.play();
+        Audio('beep.mp3').play();
     });
 
 });
