@@ -13,7 +13,7 @@
 
 #interactive.viewport video {
   display: flex;
-  width: 98vw;
+  max-width: 98vw;
 }
 
 #done {

@@ -31,6 +31,8 @@ $(function() {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
+                    width: 720,
+                    height: 240,
                     facingMode: "environment",
                 }
             },
