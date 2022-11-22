@@ -65,9 +65,11 @@ $(function() {
         attachListeners: function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
-                audio.play();
                 Quagga.stop();
             });
+            $(".container").on("click", "button.beep", function(e) {
+                audio.play();
+            })
         },
         _accessByPath: function(obj, path, val) {
             var parts = path.split('.'),
@@ -191,7 +193,8 @@ $(function() {
             if (result.codeResult && result.codeResult.code) {
                 Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
             }
-            audio.play();
+            if (!audio.isPlaying)
+                audio.play();
         }
     });
 
@@ -203,7 +206,8 @@ $(function() {
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
-            audio.play();
+            if (!audio.isPlaying)
+                audio.play();
         }
     });
 
