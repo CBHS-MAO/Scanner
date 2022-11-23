@@ -23,6 +23,5 @@
 canvas, video  {
   grid-column-start: 1;
   grid-row-start: 1;
-  max-width: 90vw;
-  max-height: 50vh;
+  width: 90vw;
 }
