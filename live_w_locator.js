@@ -1,5 +1,5 @@
 $(function() {
-    var codes = "testtest";
+    var codes = "";
     var App = {
         init: function() {
             var self = this;
