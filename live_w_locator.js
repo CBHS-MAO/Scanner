@@ -30,6 +30,7 @@ $(function() {
                 type : "LiveStream",
                 constraints: {
                     facingMode: "environment",
+                    aspectRatio: {min: 3}
                 }
             },
             locator: {
