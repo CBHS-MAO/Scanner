@@ -99,7 +99,7 @@ $(function() {
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
 
-        if (App.lastResult !== code) {
+        if (App.lastResult !== code && /^\d+$/.test(code)) {
             App.lastResult = code;
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
