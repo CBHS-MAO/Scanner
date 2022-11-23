@@ -4,7 +4,11 @@ $(function() {
         init: function() {
             var self = this;
 
-            Quagga.init(this.state, function(err) {
+            var state = this.landscapeState;
+            if (screen.availWidth < screen.availHeight)
+                state = this.portraitState;
+
+            Quagga.init(state, function(err) {
                 if (err) {
                     return self.handleError(err);
                 }
@@ -25,11 +29,31 @@ $(function() {
                 document.getElementById("done").style.display = "block";
             });
         },
-        state: {
+        portraitState: {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
                     facingMode: "environment",
+                    aspectRatio: {min: 1/3, max: 1/3}
+                }
+            },
+            locator: {
+                patchSize: "large",
+                halfSample: true
+            },
+            numOfWorkers: 2,
+            frequency: 10,
+            decoder: {
+                readers : ["code_39_reader"]
+            },
+            locate: true
+        },
+        landscapeState: {
+            inputStream: {
+                type : "LiveStream",
+                constraints: {
+                    facingMode: "environment",
+                    aspectRatio: {min: 3, max: 3}
                 }
             },
             locator: {
