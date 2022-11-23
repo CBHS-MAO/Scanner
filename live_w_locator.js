@@ -1,5 +1,5 @@
 $(function() {
-    var codes = "";
+    var codes = "\"";
     var App = {
         init: function() {
             var self = this;
@@ -24,7 +24,7 @@ $(function() {
             $(".container").on("click", "button.stop", function(e) {
                 e.preventDefault();
                 Quagga.stop();
-                navigator.clipboard.writeText(codes);
+                navigator.clipboard.writeText(codes+"\"");
                 document.getElementById("done").style.display = "block";
                 document.getElementsByClassName("stop")[0].textContent = "Copy Again";
                 document.getElementById("interactive").remove();
