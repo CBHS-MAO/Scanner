@@ -1,5 +1,12 @@
 $(function() {
-    var codes = "\"";
+    var codes = document.cookie.substring(4);
+    for (var i=0; i<codes.length; i+=10) {
+        var code = codes.substring(i, i+10);
+        var $node = $('<li><h4 class="code"></h4></li>');
+        $node.find("h4.code").html(code);
+        $("ul.codes").prepend($node);
+    }
+
     var App = {
         init: function() {
             var self = this;
@@ -21,13 +28,11 @@ $(function() {
             console.log(err);
         },
         attachListeners: function() {
-            $(".container").on("click", "button.stop", function(e) {
+            $(".container").on("click", "button.copy", function(e) {
                 e.preventDefault();
-                Quagga.stop();
-                navigator.clipboard.writeText(codes+"\"");
-                document.getElementById("done").style.display = "block";
-                document.getElementsByClassName("stop")[0].textContent = "Copy Again";
-                document.getElementById("interactive").remove();
+                navigator.clipboard.writeText("\""+codes+"\"");
+                document.getElementById("copied").style.display = "block";
+                setTimeout(function() {document.getElementById("copied").style.display = "none";}, 1000);
             });
             $("body").on("click", "button#enter", function() {
                 var code = document.getElementById("box").value;
@@ -35,10 +40,7 @@ $(function() {
                 $node.find("h4.code").html(code);
                 $("ul.codes").prepend($node);
                 codes += code;
-                document.cookie = "IDs="+codes+"\";"
-                document.getElementById("hi").innerHTML = document.cookie
-                document.getElementById("interactive").style.borderColor = "lime";
-                setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
+                document.cookie = "IDs="+codes+";";
             })
         },
         portraitState: {
