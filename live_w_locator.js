@@ -29,6 +29,17 @@ $(function() {
                 document.getElementsByClassName("stop")[0].textContent = "Copy Again";
                 document.getElementById("interactive").remove();
             });
+            $("body").on("click", "button#enter", function() {
+                var code = document.getElementById("box").value;
+                var $node = $('<li><h4 class="code"></h4></li>');
+                $node.find("h4.code").html(code);
+                $("ul.codes").prepend($node);
+                codes += code;
+                document.cookie = "IDs="+codes+"\";"
+                document.getElementById("hi").innerHTML = document.cookie
+                document.getElementById("interactive").style.borderColor = "lime";
+                setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
+            })
         },
         portraitState: {
             inputStream: {
@@ -114,13 +125,3 @@ $(function() {
 
 });
 
-function test() {
-    var code = document.getElementById("box").value;
-    var $node = $('<li><h4 class="code"></h4></li>');
-    $node.find("h4.code").html(code);
-    $("ul.codes").prepend($node);
-    codes += code;
-    document.cookie = "IDs="+codes+"\";"
-    document.getElementById("interactive").style.borderColor = "lime";
-    setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
-}
