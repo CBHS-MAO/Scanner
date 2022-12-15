@@ -113,3 +113,14 @@ $(function() {
     });
 
 });
+
+function test() {
+    var code = document.getElementById("box").value;
+    var $node = $('<li><h4 class="code"></h4></li>');
+    $node.find("h4.code").html(code);
+    $("ul.codes").prepend($node);
+    codes += code;
+    document.cookie = "IDs="+codes+"\";"
+    document.getElementById("interactive").style.borderColor = "lime";
+    setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
+}
