@@ -30,7 +30,7 @@ $(function() {
         attachListeners: function() {
             $(".container").on("click", "button.copy", function(e) {
                 e.preventDefault();
-                navigator.clipboard.writeText("\""+codes+"\"");
+                navigator.clipboard.writeText(`\"${codes}\"`);
                 document.getElementById("copied").style.display = "block";
                 setTimeout(function() {document.getElementById("copied").style.display = "none";}, 1000);
             });
@@ -41,8 +41,7 @@ $(function() {
                     $node.find("h4.code").html(code);
                     $("ul.codes").prepend($node);
                     codes += code;
-                    document.cookie = `IDs=${codes}; expires=Sun, 15 Jan 2023 01:16:15 GMT;`;
-                    //document.cookie = `IDs=${codes}; expires=${new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30).toGMTString()};`;
+                    document.cookie = `IDs=${codes}; expires=${new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30).toGMTString()};`;
                 }
             });
             $("body").on("click", "button#reset", function() {
@@ -128,7 +127,7 @@ $(function() {
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
             codes += code;
-            document.cookie = "IDs="+codes+"; expires="+(new Date(new Date().getTime()+1000*60*60*24*30).toGMTString())+";";
+            document.cookie = `IDs=${codes}; expires=${new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30).toGMTString()};`;
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }
