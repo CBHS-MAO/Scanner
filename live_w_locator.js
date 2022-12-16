@@ -41,7 +41,8 @@ $(function() {
                     $node.find("h4.code").html(code);
                     $("ul.codes").prepend($node);
                     codes += code;
-                    document.cookie = "IDs="+codes+"; expires="+(new Date(new Date().getTime()+1000*60*60*24*30).toGMTString())+";";
+                    document.cookie = `IDs=${codes}; expires=Sun, 15 Jan 2023 01:16:15 GMT;`;
+                    //document.cookie = `IDs=${codes}; expires=${new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30).toGMTString()};`;
                 }
             });
             $("body").on("click", "button#reset", function() {
