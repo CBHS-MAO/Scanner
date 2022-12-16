@@ -36,12 +36,20 @@ $(function() {
             });
             $("body").on("click", "button#enter", function() {
                 var code = document.getElementById("box").value;
-                var $node = $('<li><h4 class="code"></h4></li>');
-                $node.find("h4.code").html(code);
-                $("ul.codes").prepend($node);
-                codes += code;
-                document.cookie = "IDs="+codes+";";
-            })
+                if (code.length == 10 && /^\d+$/.test(code) && !codes.includes(code)) {
+                    var $node = $('<li><h4 class="code"></h4></li>');
+                    $node.find("h4.code").html(code);
+                    $("ul.codes").prepend($node);
+                    codes += code;
+                    document.cookie = "IDs="+codes+";";
+                }
+            });
+            $("body").on("click", "button#reset", function() {
+                document.cookie = "";
+                codes = "";
+                document.getElementsByClassName("codes")[0].innerHTML = "";
+
+            });
         },
         portraitState: {
             inputStream: {
@@ -113,13 +121,13 @@ $(function() {
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
 
-        if (App.lastResult !== code && code.length == 10 && /^\d+$/.test(code)) {
+        if (code.length == 10 && /^\d+$/.test(code) && !codes.includes(code)) {
             App.lastResult = code;
             var $node = $('<li><h4 class="code"></h4></li>');
             $node.find("h4.code").html(code);
             $("ul.codes").prepend($node);
             codes += code;
-            document.cookie = "IDs="+codes+"\";"
+            document.cookie = "IDs="+codes+";";
             document.getElementById("interactive").style.borderColor = "lime";
             setTimeout(function() {document.getElementById("interactive").style.borderColor = "black";}, 1000);
         }

@@ -12,8 +12,11 @@
 
   <body>
     <h1 style="text-align: center;"> ID Scanner </h1>
-    <input type="text" id="box">
-    <button id="enter">Enter</button>
+    <div id="manual">
+      <h3>Manual Input: </h3>
+      <input type="text" id="box">
+      <button id="enter">Enter</button>
+    </div>
     <section id="container" class="container">
       <div id="interactive" class="viewport"></div>
       <button class="copy">Copy IDs</button>
@@ -21,8 +24,8 @@
       <h3>Scanned IDs:</h3>
       <ul class="codes">
       </ul>
+      <br><button id="reset">Clear IDs</button>
     </section>
-
     <script src="jquery-1.9.0.min.js" type="text/javascript"></script>
     <script src="quagga.js" type="text/javascript"></script>
     <script src="live_w_locator.js" type="text/javascript"></script>
