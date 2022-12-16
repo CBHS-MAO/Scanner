@@ -41,11 +41,11 @@ $(function() {
                     $node.find("h4.code").html(code);
                     $("ul.codes").prepend($node);
                     codes += code;
-                    document.cookie = "IDs="+codes+";";
+                    document.cookie = "IDs="+codes+"; expires="+(new Date(new Date().getTime()+1000*60*60*24*30).toGMTString());
                 }
             });
             $("body").on("click", "button#reset", function() {
-                document.cookie = "";
+                document.cookie = "IDs=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
                 codes = "";
                 document.getElementsByClassName("codes")[0].innerHTML = "";
 
