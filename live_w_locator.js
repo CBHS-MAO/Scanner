@@ -45,9 +45,12 @@ $(function() {
                 }
             });
             $("body").on("click", "button#reset", function() {
-                document.cookie = "IDs=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                codes = "";
-                document.getElementsByClassName("codes")[0].innerHTML = "";
+                var confirmed = confirm("Are you sure you want to clear all IDs?");
+                if (confirmed) {
+                    document.cookie = "IDs=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    codes = "";
+                    document.getElementsByClassName("codes")[0].innerHTML = "";
+                }
 
             });
         },
