@@ -34,6 +34,10 @@ $(function() {
                 document.getElementById("copied").style.display = "block";
                 setTimeout(function() {document.getElementById("copied").style.display = "none";}, 1000);
             });
+            $("#box").keyup(function(event) {
+                if (event.keyCode === 13)
+                    $("#enter").click();
+            });
             $("body").on("click", "button#enter", function() {
                 var code = document.getElementById("box").value;
                 if (code.length == 10 && /^\d+$/.test(code) && !codes.includes(code)) {
